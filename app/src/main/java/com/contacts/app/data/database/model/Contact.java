@@ -5,9 +5,37 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.contacts.app.data.database.DBConstants;
+import com.contacts.app.data.network.model.ContactResponseModel;
 
 @Entity(tableName = DBConstants.CONTACTS_TABLE_NAME)
 public class Contact {
+
+    public Contact(Integer id, String uid, String password, String firstName, String lastName, String username, String email, String avatar, String gender) {
+        this.id = id;
+        this.uid = uid;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.avatar = avatar;
+        this.gender = gender;
+    }
+
+    public Contact(ContactResponseModel contactResponseModel) {
+        this(
+                contactResponseModel.getId(),
+                contactResponseModel.getUid(),
+                contactResponseModel.getPassword(),
+                contactResponseModel.getFirstName(),
+                contactResponseModel.getLastName(),
+                contactResponseModel.getUsername(),
+                contactResponseModel.getEmail(),
+                contactResponseModel.getAvatar(),
+                contactResponseModel.getGender()
+        );
+    }
+
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = DBConstants.CONTACT_ID)

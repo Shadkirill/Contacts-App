@@ -15,7 +15,7 @@ import io.reactivex.Observable;
 
 
 @Dao
-public interface ContactDao {
+public interface ContactsDao {
 
     @Insert
     Completable insert(Contact contact);
