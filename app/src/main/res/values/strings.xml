@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Contacts App</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">Random</string>
+    <string name="tab_text_2">Favourite</string>
     <string name="some_error">Some error</string>
+    <string name="Add">Add</string>
+    <string name="Remove">Remove</string>
 </resources>

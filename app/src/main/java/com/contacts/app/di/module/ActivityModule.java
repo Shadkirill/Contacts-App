@@ -4,14 +4,19 @@ package com.contacts.app.di.module;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.contacts.app.data.database.model.Contact;
 import com.contacts.app.di.ActivityContext;
 import com.contacts.app.di.ActivityScope;
-import com.contacts.app.ui.contacts.ContactsInteractor;
-import com.contacts.app.ui.contacts.ContactsMvpInteractor;
-import com.contacts.app.ui.contacts.ContactsMvpPresenter;
-import com.contacts.app.ui.contacts.ContactsMvpView;
-import com.contacts.app.ui.contacts.ContactsPresenter;
+import com.contacts.app.ui.contact_list.ContactsAdapter;
+import com.contacts.app.ui.contact_list.ContactsInteractor;
+import com.contacts.app.ui.contact_list.ContactsMvpInteractor;
+import com.contacts.app.ui.contact_list.ContactsMvpPresenter;
+import com.contacts.app.ui.contact_list.ContactsMvpView;
+import com.contacts.app.ui.contact_list.ContactsPresenter;
+
+import java.util.ArrayList;
 
 import dagger.Module;
 import dagger.Provides;
@@ -49,11 +54,28 @@ public class ActivityModule {
         return presenter;
     }
 
+   /* @Provides
+    @ActivityScope
+    ContactsRepository provideContactsRepository(ContactsRepository contactsRepository) {
+        return contactsRepository;
+    }*/
+
     @Provides
     @ActivityScope
     ContactsMvpInteractor provideContactsMvpInteractor(ContactsInteractor interactor) {
         return interactor;
     }
+
+    @Provides
+    ContactsAdapter provideContactAdapter() {
+        return new ContactsAdapter(new ArrayList<Contact>());
+    }
+
+    @Provides
+    LinearLayoutManager provideLinearLayoutManager(AppCompatActivity activity) {
+        return new LinearLayoutManager(activity);
+    }
+
 
 }
 

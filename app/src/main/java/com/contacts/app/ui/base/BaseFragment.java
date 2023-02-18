@@ -25,6 +25,7 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
 
+import com.contacts.app.di.component.ActivityComponent;
 import com.contacts.app.utils.CommonUtils;
 
 public abstract class BaseFragment extends Fragment implements MvpView {
@@ -114,6 +115,13 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         if (mActivity != null) {
             mActivity.hideKeyboard();
         }
+    }
+
+    public ActivityComponent getActivityComponent() {
+        if (mActivity != null) {
+            return mActivity.getActivityComponent();
+        }
+        return null;
     }
 
     public BaseActivity getBaseActivity() {

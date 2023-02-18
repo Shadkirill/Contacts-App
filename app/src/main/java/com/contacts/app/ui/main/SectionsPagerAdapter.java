@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.contacts.app.R;
+import com.contacts.app.ui.contact_list.ContactsFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -24,8 +25,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
+        if (position == 0) {
+            return ContactsFragment.newInstance();
+        }
         return PlaceholderFragment.newInstance(position + 1);
     }
 

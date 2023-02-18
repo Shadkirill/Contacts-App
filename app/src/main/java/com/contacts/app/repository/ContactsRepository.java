@@ -1,5 +1,7 @@
 package com.contacts.app.repository;
 
+import android.util.Log;
+
 import com.contacts.app.data.database.model.Contact;
 import com.contacts.app.data.network.ApiService;
 import com.contacts.app.data.network.model.ContactResponseModel;
@@ -11,6 +13,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 public class ContactsRepository {

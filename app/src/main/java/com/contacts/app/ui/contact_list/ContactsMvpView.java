@@ -1,4 +1,4 @@
-package com.contacts.app.ui.contacts;
+package com.contacts.app.ui.contact_list;
 
 import com.contacts.app.data.database.model.Contact;
 import com.contacts.app.ui.base.MvpView;
