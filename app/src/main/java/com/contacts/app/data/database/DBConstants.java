@@ -14,4 +14,6 @@ public interface DBConstants {
     String CONTACT_EMAIL = "email";
     String CONTACT_AVATAR = "avatar";
     String CONTACT_GENDER = "gender";
+    String CONTACT_AVATAR_FILE = "avatar_file";
+    String CONTACT_FAVOURITE = "favourite";
 }

@@ -8,5 +8,5 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface ContactsMvpInteractor extends MvpInteractor {
-    Observable<List<Contact>> getContactsApiCall(int size);
+    Observable<List<Contact>> getContacts();
 }

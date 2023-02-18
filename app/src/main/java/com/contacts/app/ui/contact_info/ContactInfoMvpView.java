@@ -7,5 +7,6 @@ import java.util.List;
 
 
 public interface ContactInfoMvpView extends MvpView {
-
+    void showContactInformation(Contact contact);
+    void changeAvatar();
 }

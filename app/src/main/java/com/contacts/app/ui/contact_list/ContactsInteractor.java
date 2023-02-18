@@ -7,6 +7,7 @@ import com.contacts.app.ui.base.BaseInteractor;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.Observable;
 
@@ -15,13 +16,13 @@ public class ContactsInteractor extends BaseInteractor implements ContactsMvpInt
     private ContactsRepository contactsRepository;
 
     @Inject
-    public ContactsInteractor(ContactsRepository contactsRepository) {
+    public ContactsInteractor(@Named("Network") ContactsRepository contactsRepository) {
         this.contactsRepository = contactsRepository;
     }
 
     @Override
-    public Observable<List<Contact>> getContactsApiCall(int size) {
-        return contactsRepository.getAllUsers();
+    public Observable<List<Contact>> getContacts() {
+        return contactsRepository.getAllContacts();
     }
 
 }

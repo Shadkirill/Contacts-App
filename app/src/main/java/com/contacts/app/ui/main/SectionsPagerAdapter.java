@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.contacts.app.R;
 import com.contacts.app.ui.contact_list.ContactsFragment;
+import com.contacts.app.ui.contact_list.ContactsNetworkFragment;
+import com.contacts.app.ui.contact_list.favourite.FavouriteContactsFragment;
 
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -26,9 +28,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return ContactsFragment.newInstance();
+            return ContactsNetworkFragment.newInstance();
         }
-        return PlaceholderFragment.newInstance(position + 1);
+        return FavouriteContactsFragment.newInstance();
     }
 
     @Nullable

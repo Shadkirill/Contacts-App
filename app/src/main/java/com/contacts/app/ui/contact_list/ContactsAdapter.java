@@ -41,8 +41,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         holder.secondNameTextView.setText(contact.getLastName());
         Glide
                 .with(holder.itemView.getContext())
-                .load(contact.getAvatar())
-                .centerCrop()
+                .load(contact.getAvatarUri())
                 .placeholder(R.drawable.avatar_placeholder)
                 .into(holder.imageView);
         holder.itemView.setOnClickListener(view -> {
@@ -62,8 +61,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     }
 
     public void addItems(List<Contact> contactsList) {
+        int sizeRemoved = this.contactsList.size();
+        this.contactsList.clear();
         this.contactsList.addAll(contactsList);
-        notifyDataSetChanged();
+        notifyItemRangeRemoved(0, sizeRemoved);
+        notifyItemRangeInserted(0, contactsList.size());
     }
 
     public interface Callback {

@@ -3,6 +3,7 @@ package com.contacts.app.ui.contact_list;
 import com.contacts.app.ui.base.BasePresenter;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -13,7 +14,7 @@ public class ContactsPresenter <V extends ContactsMvpView,
         implements ContactsMvpPresenter<V, I> {
 
     @Inject
-    public ContactsPresenter(I mvpInteractor, CompositeDisposable compositeDisposable) {
+    public ContactsPresenter(@Named("Network") I mvpInteractor, CompositeDisposable compositeDisposable) {
         super(mvpInteractor, compositeDisposable);
     }
 
@@ -21,11 +22,11 @@ public class ContactsPresenter <V extends ContactsMvpView,
     public void onViewPrepared() {
         getMvpView().showLoading();
         getCompositeDisposable().add(getInteractor()
-                .getContactsApiCall(10)
+                .getContacts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(contactList -> {
-                    if (contactList != null && contactList.size() > 0) {
+                    if (contactList != null) {
                         getMvpView().updateContacts(contactList);
                     }
                     getMvpView().hideLoading();

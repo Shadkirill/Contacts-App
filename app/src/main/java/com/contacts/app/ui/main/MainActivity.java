@@ -9,6 +9,8 @@ import com.contacts.app.ui.contact_info.ContactInfoFragment;
 import com.contacts.app.ui.contact_list.ContactsFragment;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.contacts.app.databinding.ActivityMainBinding;
@@ -25,10 +27,10 @@ public class MainActivity extends BaseActivity implements MainMvpView, ContactsF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        getActivityComponent().inject(this);
+        presenter.onAttach(this);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -45,14 +47,21 @@ public class MainActivity extends BaseActivity implements MainMvpView, ContactsF
     public void showContactDetails(Contact contact) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .disallowAddToBackStack()
+                .addToBackStack(null)
                 .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
-                .add(R.id.fragment_container, ContactInfoFragment.newInstance(), ContactInfoFragment.TAG)
+                .replace(R.id.fragment_container, ContactInfoFragment.newInstance(contact), ContactInfoFragment.TAG)
                 .commit();
     }
 
-    private void showContactDetailsFragment() {
-
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(ContactInfoFragment.TAG);
+        if (fragment == null) {
+            super.onBackPressed();
+        } else {
+            onFragmentDetached(ContactInfoFragment.TAG);
+        }
     }
 
 }

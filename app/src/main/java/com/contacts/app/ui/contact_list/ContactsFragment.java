@@ -19,11 +19,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ContactsFragment extends BaseFragment implements
+public abstract class ContactsFragment extends BaseFragment implements
         ContactsMvpView, ContactsAdapter.ItemClickListener {
-
-    @Inject
-    ContactsPresenter<ContactsMvpView, ContactsMvpInteractor> presenter;
 
     @Inject
     ContactsAdapter contactsAdapter;
@@ -33,13 +30,8 @@ public class ContactsFragment extends BaseFragment implements
 
     private FragmentContactsListBinding binding;
 
-    public static ContactsFragment newInstance() {
-        Bundle args = new Bundle();
-        ContactsFragment fragment = new ContactsFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    public abstract ContactsMvpPresenter<ContactsMvpView, ContactsMvpInteractor> getPresenter();
+    public abstract void inject(ActivityComponent component);
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,8 +39,8 @@ public class ContactsFragment extends BaseFragment implements
         binding = FragmentContactsListBinding.inflate(inflater, container, false);
         ActivityComponent component = getActivityComponent();
         if (component != null) {
-            component.inject(this);
-            presenter.onAttach(this);
+            inject(component);
+            getPresenter().onAttach(this);
             contactsAdapter.setItemClickListener(this);
         }
         return binding.getRoot();
@@ -63,13 +55,12 @@ public class ContactsFragment extends BaseFragment implements
         binding.recyclerView.addItemDecoration(dividerItemDecoration);
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerView.setAdapter(contactsAdapter);
-        presenter.onViewPrepared();
+        getPresenter().onViewPrepared();
     }
 
     @Override
     public void updateContacts(List<Contact> contactsList) {
         contactsAdapter.addItems(contactsList);
-        showMessage("" + contactsList.size());
     }
 
 

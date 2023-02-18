@@ -23,12 +23,7 @@ public class MainPresenter<V extends MainMvpView, I extends MainMvpInteractor>
     }
 
     @Override
-    public void onBackClick() {
-
-    }
-
-    @Override
     public void onContactClick(Contact contact) {
-
+        getMvpView().showContactDetails(contact);
     }
 }

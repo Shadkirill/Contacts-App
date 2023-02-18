@@ -1,17 +1,11 @@
-package com.contacts.app.ui.contact_info;
+package com.contacts.app.repository;
 
 import com.contacts.app.data.database.model.Contact;
-import com.contacts.app.ui.base.MvpInteractor;
-
-import java.util.List;
 
 import io.reactivex.Completable;
 
-
-public interface ContactInfoMvpInteractor extends MvpInteractor {
-
+public interface ContactsStorageRepository {
     Completable addContact(Contact contact);
     Completable removeContact(Contact contact);
     Completable updateContact(Contact contact);
-
 }

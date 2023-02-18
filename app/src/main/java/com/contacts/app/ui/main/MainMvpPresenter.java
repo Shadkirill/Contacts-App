@@ -9,7 +9,5 @@ import com.contacts.app.ui.base.MvpPresenter;
 public interface MainMvpPresenter<V extends MainMvpView, I extends MainMvpInteractor>
         extends MvpPresenter<V, I> {
 
-    void onBackClick();
-
     void onContactClick(Contact contact);
 }
